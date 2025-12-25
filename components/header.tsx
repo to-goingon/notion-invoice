@@ -8,7 +8,7 @@ export function Header() {
       <div className="container flex h-16 items-center">
         <div className="mr-8 flex">
           <Link href="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold">Next.js Starter</span>
+            <span className="text-xl font-bold">Notion Invoice Manager</span>
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">

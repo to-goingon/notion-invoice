@@ -10,16 +10,8 @@ const routes = [
     label: "Home",
   },
   {
-    href: "/about" as const,
-    label: "About",
-  },
-  {
-    href: "/dashboard" as const,
-    label: "Dashboard",
-  },
-  {
-    href: "/contact" as const,
-    label: "Contact",
+    href: "/invoices" as const,
+    label: "Invoices",
   },
 ] as const;
 

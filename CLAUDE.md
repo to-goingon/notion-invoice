@@ -36,6 +36,7 @@ Route groups use parentheses `()` and don't affect URL structure - `/about` is s
 ### Root Layout Pattern
 
 `app/layout.tsx` is the root layout that:
+
 1. Configures the Inter font via `next/font/google`
 2. Wraps entire app with `<ThemeProvider>` from `next-themes`
 3. Sets `suppressHydrationWarning` on `<html>` to prevent dark mode hydration errors
@@ -45,12 +46,14 @@ Route groups use parentheses `()` and don't affect URL structure - `/about` is s
 All forms use React Hook Form + Zod with centralized schemas:
 
 1. Define schemas in `lib/validations.ts` with inferred types:
+
    ```ts
    export const loginSchema = z.object({ ... });
    export type LoginFormData = z.infer<typeof loginSchema>;
    ```
 
 2. Use in components with `zodResolver`:
+
    ```ts
    const form = useForm<LoginFormData>({
      resolver: zodResolver(loginSchema),
@@ -92,6 +95,7 @@ All forms use React Hook Form + Zod with centralized schemas:
 ### TypeScript Configuration
 
 Strict mode enabled with additional safety checks:
+
 - `strict: true`
 - `noUnusedLocals: true`
 - `noUnusedParameters: true`
@@ -109,31 +113,30 @@ Path alias: `@/*` maps to repository root
 ## Adding New Features
 
 ### New Page in Main Layout
+
 1. Create file in `app/(main)/[page-name]/page.tsx`
 2. Add route to `components/nav-menu.tsx` if needed for navigation
 
 ### New Auth Page
+
 1. Create file in `app/(auth)/[page-name]/page.tsx`
 2. Use centered layout automatically
 
 ### New shadcn Component
+
 ```bash
 npx shadcn@latest add [component-name]
 ```
 
 ### New Form
+
 1. Define schema in `lib/validations.ts`
 2. Export inferred type: `export type FormData = z.infer<typeof schema>`
 3. Use with React Hook Form + `zodResolver` in component
 
-## Project Context
+## 작업 완료 체크
 
-This is a **Next.js 16.1 starter template** designed for small-scale applications with:
-- App Router architecture
-- TypeScript strict mode
-- Tailwind CSS v4
-- shadcn/ui components
-- Dark mode support
-- Form validation with React Hook Form + Zod
-
-Built for simplicity - intentionally minimal to avoid over-engineering.
+```bash
+npm run check-all          # 모든 체크 통과 확인
+npm run build              # 빌드 성공 확인
+```

@@ -1,26 +1,30 @@
-// Invoice line item
+// Invoice item from Notion Items database
 export interface InvoiceItem {
-  description: string;
+  id: string;
+  name: string;
   quantity: number;
   unit_price: number;
   amount: number;
 }
 
-// Invoice data structure
+// Invoice data structure from Notion Invoices database
 export interface Invoice {
   id: string;
   invoice_number: string;
-  issue_date: string;
   client_name: string;
-  client_email: string;
-  client_address: string;
-  issuer_name: string;
-  issuer_email: string;
-  issuer_address: string;
+  issue_date: string;
+  due_date: string;
+  status: string;
   total_amount: number;
-  currency: string;
   items: InvoiceItem[];
-  notes: string;
+  // Optional fields for future expansion
+  client_email?: string;
+  client_address?: string;
+  issuer_name?: string;
+  issuer_email?: string;
+  issuer_address?: string;
+  currency?: string;
+  notes?: string;
 }
 
 // Generic API response type

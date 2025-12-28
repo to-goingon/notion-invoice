@@ -1,27 +1,30 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import { getAllInvoices } from "@/lib/services/invoice-service";
+import { InvoiceListWithSearch } from "@/components/invoice-list-with-search";
+
+// Enable ISR with 60 second revalidation
+export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Invoices - Notion Invoice Manager",
-  description: "Browse all invoices from your Notion database",
+  title: "인보이스 목록 - Notion Invoice Manager",
+  description: "Notion 데이터베이스의 모든 인보이스를 확인하세요",
 };
 
-export default function InvoicesPage() {
+export default async function InvoicesPage() {
+  // Fetch invoices directly from Notion API
+  const invoices = await getAllInvoices();
+
   return (
     <div className="container py-12">
       <div className="space-y-8">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Invoices</h1>
+          <h1 className="text-3xl font-bold tracking-tight">인보이스 목록</h1>
           <p className="text-muted-foreground mt-2">
-            View and manage all your invoices from Notion.
+            Notion 데이터베이스의 모든 인보이스를 확인하세요.
           </p>
         </div>
 
-        <div className="rounded-lg border bg-card p-8 text-center">
-          <p className="text-muted-foreground">
-            Invoice list will be implemented here. This page will fetch invoices from your Notion
-            database and display them in a searchable table.
-          </p>
-        </div>
+        <InvoiceListWithSearch invoices={invoices} />
       </div>
     </div>
   );

@@ -21,8 +21,8 @@ const envSchema = z.object({
     .describe("Notion database ID for invoice items"),
   NEXT_PUBLIC_BASE_URL: z
     .string()
-    .url("NEXT_PUBLIC_BASE_URL must be a valid URL")
-    .describe("Application base URL"),
+    .default("")
+    .describe("Application base URL (auto-detected from VERCEL_URL)"),
 });
 
 /**
@@ -33,7 +33,10 @@ export const env = envSchema.parse({
   NOTION_API_KEY: process.env.NOTION_API_KEY,
   NOTION_DATABASE_ID: process.env.NOTION_DATABASE_ID,
   NOTION_ITEMS_DATABASE_ID: process.env.NOTION_ITEMS_DATABASE_ID,
-  NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
+  NEXT_PUBLIC_BASE_URL:
+    process.env.NEXT_PUBLIC_BASE_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "") ||
+    "http://localhost:3000",
 });
 
 export type Env = z.infer<typeof envSchema>;
